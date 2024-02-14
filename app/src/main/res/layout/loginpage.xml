@@ -91,7 +91,7 @@
         android:linksClickable="true"/>
 
     <Button
-        android:id="@+id/btngotoSignup"
+        android:id="@+id/btnSignup"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
