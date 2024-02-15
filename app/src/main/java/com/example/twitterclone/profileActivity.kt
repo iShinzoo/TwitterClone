@@ -36,8 +36,13 @@ class profileActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Glide.with(this).clear(profileImage) // Assuming profileImage is the ImageView in your activity
+        try {
+            Glide.with(this).clear(profileImage) // Assuming profileImage is the ImageView in your activity
+        } catch (e: IllegalArgumentException) {
+            // Ignore IllegalArgumentException as it occurs when trying to clear a load for a destroyed activity
+        }
     }
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

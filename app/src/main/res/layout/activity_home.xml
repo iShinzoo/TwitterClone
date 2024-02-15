@@ -12,4 +12,35 @@
         android:id="@+id/toolbarLayout"
         layout="@layout/toolbar"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="12dp"
+        app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator"
+        android:backgroundTint="#5353F3"
+        android:src="@drawable/add"
+        app:fabSize="normal"
+        app:useCompatPadding="false"
+        app:borderWidth="0dp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        android:backgroundTint="@color/white"
+        app:tabIndicatorColor="#5353F3"
+        app:tabTextColor="#5353F3"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

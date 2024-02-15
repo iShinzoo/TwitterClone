@@ -7,6 +7,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.viewpager2.widget.ViewPager2
+import com.example.twitterclone.adapters.ViewPagerAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -14,6 +19,10 @@ import com.google.firebase.ktx.Firebase
 class HomeActivity : AppCompatActivity() {
     private lateinit var toolbar : Toolbar
     private lateinit var mauth : FirebaseAuth
+    private lateinit var fab : FloatingActionButton
+    private lateinit var tabLayout : TabLayout
+    private lateinit var viewPager : ViewPager2
+    private lateinit var VpAdapter : ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +31,19 @@ class HomeActivity : AppCompatActivity() {
         init()
 
         setSupportActionBar(toolbar)
+
+        fab.setOnClickListener(){
+            startActivity(
+                Intent(this,TweetActivity::class.java)
+            )
+        }
+
+        TabLayoutMediator(tabLayout,viewPager){ tab : TabLayout.Tab , position : Int ->
+            when(position){
+                0 -> tab.text = "Tweets"
+                else -> tab.text = "Accounts"
+            }
+        }.attach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -58,5 +80,10 @@ class HomeActivity : AppCompatActivity() {
     private fun init(){
         toolbar = findViewById(R.id.toolbarLayout)
         mauth = Firebase.auth
+        fab = findViewById(R.id.fab)
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.viewPager)
+        VpAdapter = ViewPagerAdapter(this)
+        viewPager.adapter = VpAdapter
     }
 }

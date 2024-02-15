@@ -82,8 +82,7 @@ class LoginActivity : AppCompatActivity() {
 
                     // add user to the firebase database
                     val user = User(
-                        userEmail = "",
-                        userName = "",
+                        userEmail = edtloginEmail.text.toString(),
                         userProfileImage = "",
                         listOffollowings = listofFollowings,
                         listoftweets = listofTweets,
