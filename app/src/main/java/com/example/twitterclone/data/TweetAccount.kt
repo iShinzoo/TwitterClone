@@ -4,3 +4,4 @@ data class TweetAccount(
     val TweetContent : String,
     val TweetProfileImage : String
 )
+
