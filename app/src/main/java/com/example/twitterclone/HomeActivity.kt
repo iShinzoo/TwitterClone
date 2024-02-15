@@ -36,6 +36,9 @@ class HomeActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.menu_profile -> {
                 // open profile page
+                startActivity(
+                    Intent(this,profileActivity::class.java)
+                )
 
                 Toast.makeText(this, "Edit Profile", Toast.LENGTH_SHORT).show()
             }
