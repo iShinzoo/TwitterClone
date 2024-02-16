@@ -13,12 +13,10 @@ import com.example.twitterclone.data.TweetAccount
 import de.hdodenhof.circleimageview.CircleImageView
 
 class TweetAccountAdapter(
-    private val listofTweets : List<TweetAccount>,
-    private val context: Context,
+    private val listofTweets : List<TweetAccount>
 ) : RecyclerView.Adapter<TweetAccountAdapter.viewHolder>() {
 
     class viewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val tweetimage : CircleImageView = itemView.findViewById(R.id.suggest_account_dp)
         val tweetContent : TextView = itemView.findViewById(R.id.tweetContent)
 
     }
@@ -35,8 +33,5 @@ class TweetAccountAdapter(
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val currentTweet = listofTweets[position]
         holder.tweetContent.text = currentTweet.TweetContent
-        Glide.with(context)
-            .load(currentTweet.TweetProfileImage)
-            .into(holder.tweetimage)
     }
 }

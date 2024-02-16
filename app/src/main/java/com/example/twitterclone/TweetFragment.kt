@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.twitterclone.adapters.TweetAccountAdapter
 import com.example.twitterclone.data.TweetAccount
+import com.example.twitterclone.data.User
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -32,12 +33,11 @@ class TweetFragment : Fragment() {
         return view
     }
 
-    var new =
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         rvtweet = view.findViewById(R.id.rvTweet)
-        tweetadapter = TweetAccountAdapter(listOftweet,requireContext())
+        tweetadapter = TweetAccountAdapter(listOftweet)
         rvtweet.layoutManager = LinearLayoutManager(requireContext())
         rvtweet.adapter = tweetadapter
 
@@ -48,8 +48,6 @@ class TweetFragment : Fragment() {
                     listOfFollowingsUids.forEach(){
                         getTweetfromUID(it)
                     }
-
-
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -60,26 +58,27 @@ class TweetFragment : Fragment() {
 
     }
 
-    private fun getTweetfromUID(uid : String){
+    private fun getTweetfromUID(uid: String) {
         FirebaseDatabase.getInstance().getReference().child("users").child(uid)
-            .addListenerForSingleValueEvent(object  : ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    var tweetlist = mutableListOf<String>()
+                    var tweetList = mutableListOf<String>()
                     snapshot.child("listoftweets").value?.let {
-                        tweetlist =  it as MutableList<String>
+                        tweetList = it as MutableList<String>
                     }
-                    tweetlist.forEach {
-                        if (it.isNullOrBlank()){
+
+                    tweetList.forEach {
+                        if (!it.isNullOrBlank()){
                             listOftweet.add(TweetAccount(it))
                         }
                     }
-
+                    tweetadapter.notifyDataSetChanged()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    // Handle error
                 }
-
             })
     }
+
 }
